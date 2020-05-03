@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADOClientApp", "ADOClientApp\ADOClientApp.csproj", "{1E1106F1-35E4-4197-8174-C515021585CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1E1106F1-35E4-4197-8174-C515021585CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E1106F1-35E4-4197-8174-C515021585CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E1106F1-35E4-4197-8174-C515021585CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E1106F1-35E4-4197-8174-C515021585CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B1DF310-A2F3-4FCF-80A0-CAD1E88C0BB2}
+	EndGlobalSection
+EndGlobal
