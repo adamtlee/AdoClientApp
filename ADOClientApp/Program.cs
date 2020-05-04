@@ -9,25 +9,27 @@ namespace ADOClientApp
         static void Main(string[] args)
         {
             string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ADOClientDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            string query = "Select * from AdoClient";
             SqlConnection conn = new SqlConnection(connectionString);
+            SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
             conn.Open();
-            ReadData(conn); 
-            // InsertData(conn); 
+            DataSet clientData = new DataSet();
+           //CreateData(adapter, clientData);
+            ReadData(adapter, clientData); 
+             
 
             // Close the connection String
             conn.Close();
         }
 
-        public static void InsertData(SqlConnection conn)
+        public static void CreateData(SqlDataAdapter adapter, DataSet clientData)
         {
-            // string insertmethod = "INSERT INTO ADOClient (Id, Name, Description, Abbreviation, ClientType) VALUES()"
+           
+
         }
 
-        public static void ReadData(SqlConnection conn)
-        {
-            string querystring = "Select * from AdoClient";
-            SqlDataAdapter adapter = new SqlDataAdapter(querystring, conn);
-            DataSet clientData = new DataSet();
+        public static void ReadData(SqlDataAdapter adapter, DataSet clientData)
+        {              
             adapter.Fill(clientData, "AdoClient");
             Console.WriteLine(clientData.GetXml());
             Console.ReadKey();
