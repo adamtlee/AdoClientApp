@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ADOClientApp.Models;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -8,6 +9,7 @@ namespace ADOClientApp
     {
         static void Main(string[] args)
         {
+
             string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ADOClientDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             string query = "Select * from AdoClient";
             SqlConnection conn = new SqlConnection(connectionString);
@@ -16,16 +18,17 @@ namespace ADOClientApp
             DataSet clientData = new DataSet();
             adapter.Fill(clientData, "AdoClient");
 
-            menu:
+        menu:
             Console.WriteLine("Welcome to the client App. ");
             Console.Write(
                 "Enter the following commands to perform Crud operations" + "\n" +
                 "Enter c to create a new client" + "\n" +
-                "Enter r to read the client" + "\n" + 
+                "Enter r to read the client list" + "\n" +
+                "Enter z to read an client by Id" + "\n" +
                 "Enter u to update a client" + "\n" +
                 "Enter d to delete a client" + "\n");
 
-            string userInput = Console.ReadLine().ToLower(); 
+            string userInput = Console.ReadLine().ToLower();
             switch (userInput)
             {
                 case "c":
@@ -34,8 +37,11 @@ namespace ADOClientApp
                 case "r":
                     ReadClient(adapter, clientData);
                     goto menu;
+                case "z":
+                    ReadClientById(adapter, clientData);
+                    goto menu;
                 case "u":
-                   UpdateClient(adapter, clientData);
+                    UpdateClient(adapter, clientData);
                     goto menu;
                 case "d":
                     DeleteClient(adapter, clientData);
@@ -43,15 +49,9 @@ namespace ADOClientApp
                 default:
                     Console.WriteLine("Incorrect Input");
                     break;
+
             }
 
-            // CreateClient(adapter, clientData);
-
-            // ReadClient(adapter, clientData); 
-
-            // UpdateClient(adapter, clientData); 
-
-            DeleteClient(adapter, clientData);
             // Close the connection String
             conn.Close();
         }
@@ -85,9 +85,23 @@ namespace ADOClientApp
         }
 
         public static void ReadClient(SqlDataAdapter adapter, DataSet clientData)
-        {              
+        {
             Console.WriteLine(clientData.GetXml());
             Console.ReadKey();
+        }
+
+        private static void ReadClientById(SqlDataAdapter adapter, DataSet clientData)
+        {
+            // SqlCommand cmd = new SqlCommand(adapter, clientData);
+            // SqlDataReader reader = cmd.ExecuteReader();
+            Console.WriteLine("ReadClientById");
+            Console.WriteLine("Enter the Id of the Client: ");
+            string input = Console.ReadLine();
+
+            int i = Convert.ToInt32(input);
+            Console.WriteLine(i);
+            //= clientData.Tables["AdoClient"].Rows[i]["Name"]; 
+
         }
 
         public static void UpdateClient(SqlDataAdapter adapter, DataSet clientData)
