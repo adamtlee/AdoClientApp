@@ -14,23 +14,47 @@ namespace ADOClientApp
             SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
             conn.Open();
             DataSet clientData = new DataSet();
-           //CreateData(adapter, clientData);
-            ReadData(adapter, clientData); 
+            adapter.Fill(clientData, "AdoClient");
+
+            CreateClient(adapter, clientData);
+
+            // ReadClient(adapter, clientData); 
              
 
             // Close the connection String
             conn.Close();
         }
 
-        public static void CreateData(SqlDataAdapter adapter, DataSet clientData)
+        public static void CreateClient(SqlDataAdapter adapter, DataSet clientData)
         {
-           
+            DataRow row = clientData.Tables["AdoClient"].NewRow();
+            Console.WriteLine("Creating new Row..");
 
+            Console.Write("[Temp] Insert ID: ");
+            row["Id"] = Console.ReadLine();
+
+            Console.WriteLine("Enter The Name of the Client: ");
+            row["Name"] = Console.ReadLine();
+
+            Console.WriteLine("Enter the Description: ");
+            row["Description"] = Console.ReadLine();
+
+            Console.WriteLine("Enter the Abbreviation: ");
+            row["Abbreviation"] = Console.ReadLine();
+
+            Console.WriteLine("Enter the Client Type: ");
+            row["ClientType"] = Console.ReadLine();
+
+            clientData.Tables["AdoClient"].Rows.Add(row);
+
+            SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
+            adapter.Update(clientData.Tables["AdoClient"]);
+
+            Console.WriteLine("Client Sucessfully created!");
         }
 
-        public static void ReadData(SqlDataAdapter adapter, DataSet clientData)
+        public static void ReadClient(SqlDataAdapter adapter, DataSet clientData)
         {              
-            adapter.Fill(clientData, "AdoClient");
             Console.WriteLine(clientData.GetXml());
             Console.ReadKey();
         }
